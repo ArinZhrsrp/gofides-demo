@@ -9,6 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Font Awesome for eye icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <style>
       body,
       html {
@@ -71,6 +76,39 @@
           transform: translateY(0px);
         }
       }
+
+      /* Password input container styles */
+      .password-container {
+        position: relative;
+        width: 100%;
+      }
+
+      .password-input {
+        width: 100%;
+        padding-right: 45px; /* Space for eye icon */
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #9ca3af;
+        transition: color 0.2s ease;
+        z-index: 10;
+        background: transparent;
+        border: none;
+        font-size: 18px;
+      }
+
+      .toggle-password:hover {
+        color: #7263f3;
+      }
+
+      .toggle-password i {
+        pointer-events: none;
+      }
     </style>
   </head>
 
@@ -113,7 +151,6 @@
               <input
                 type="text"
                 placeholder="Enter code"
-                required
                 class="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all"
               />
             </div>
@@ -126,7 +163,6 @@
               <input
                 type="email"
                 placeholder="Enter email address"
-                required
                 class="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all"
               />
             </div>
@@ -136,12 +172,25 @@
                 class="block text-[10px] font-bold text-gray-400 uppercase mb-1 tracking-widest"
                 >Password</label
               >
-              <input
-                type="password"
-                placeholder="Enter password"
-                required
-                class="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all"
-              />
+              <div class="password-container">
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter password"
+                  class="w-full px-4 py-3.5 bg-gray-50 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-200 transition-all password-input"
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  onclick="togglePasswordVisibility()"
+                  aria-label="Toggle password visibility"
+                >
+                  <i
+                    class="fa-regular fa-eye-slash"
+                    id="togglePasswordIcon"
+                  ></i>
+                </button>
+              </div>
               <div class="text-right mt-1">
                 <a
                   href="#"
@@ -204,6 +253,21 @@
     </div>
 
     <script>
+      function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.getElementById("togglePasswordIcon");
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          toggleIcon.classList.remove("fa-eye-slash");
+          toggleIcon.classList.add("fa-eye");
+        } else {
+          passwordInput.type = "password";
+          toggleIcon.classList.remove("fa-eye");
+          toggleIcon.classList.add("fa-eye-slash");
+        }
+      }
+
       function handleLogin(event) {
         event.preventDefault(); // Elak page refresh
 

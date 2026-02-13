@@ -123,6 +123,22 @@
         border-color: #cbd5e1;
       }
 
+      /* Updated bar graph styles */
+      .bar-graph {
+        display: flex;
+        align-items: flex-end;
+        gap: 3px;
+        height: 40px;
+        margin-top: 16px;
+      }
+
+      .bar-graph-item {
+        flex: 1;
+        border-radius: 3px 3px 0 0;
+        transition: height 0.2s ease;
+        height: calc(100% * var(--bar-height, 0.8));
+      }
+
       .sparkline {
         display: flex;
         align-items: flex-end;
@@ -377,30 +393,13 @@
         class="w-64 bg-white border-r border-slate-200 flex flex-col h-full flex-shrink-0 overflow-y-auto"
       >
         <!-- Logo -->
+        <!-- Logo -->
         <div class="p-4 border-b border-slate-100">
-          <div class="flex items-center gap-3">
-            <div
-              class="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center shadow-md"
-            >
-              <svg
-                class="w-5 h-5 text-white"
-                viewbox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <div>
-              <span id="company-name" class="text-lg font-bold text-slate-800"
-                >goFides</span
-              >
-              <p class="text-xs text-slate-500">Loyalty Platform</p>
-            </div>
-          </div>
+          <img
+            src="/gofides/lightmode/gofideslogo.svg"
+            alt="Company Logo"
+            class="w-full h-auto max-h-12 object-contain"
+          />
         </div>
         <!-- Navigation (exactly the same as original) -->
         <nav class="flex-1 py-2 overflow-y-auto">
@@ -627,7 +626,7 @@
               <p class="text-xs text-slate-500 truncate">Admin</p>
             </div>
             <button
-              onclick="window.location.href = '/gofides/lightmode/index.html'"
+              onclick="window.location.href = '/gofides/lightmode/login.html'"
               class="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
               title="Logout"
             >
@@ -729,7 +728,7 @@
             </div>
           </div>
 
-          <!-- KPI CARDS - UPDATED WITH 5 CARDS (4 original + Active Members) -->
+          <!-- KPI CARDS - UPDATED WITH 5 CARDS (4 original + Active Members) AND BAR GRAPHS -->
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"
           >
@@ -780,7 +779,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="sparkline mt-4" id="sparkline-members"></div>
+              <div class="bar-graph" id="members-bars"></div>
             </div>
 
             <!-- ACTIVE MEMBERS (NEW) -->
@@ -828,7 +827,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="sparkline mt-4" id="sparkline-active-members"></div>
+              <div class="bar-graph" id="active-bars"></div>
             </div>
 
             <!-- Points Issued -->
@@ -877,7 +876,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="sparkline mt-4" id="sparkline-points"></div>
+              <div class="bar-graph" id="points-bars"></div>
             </div>
 
             <!-- Total Channels -->
@@ -925,7 +924,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="sparkline mt-4" id="sparkline-channels"></div>
+              <div class="bar-graph" id="channels-bars"></div>
             </div>
 
             <!-- Total Revenue -->
@@ -975,7 +974,7 @@
                   </svg>
                 </div>
               </div>
-              <div class="sparkline mt-4" id="sparkline-revenue"></div>
+              <div class="bar-graph" id="revenue-bars"></div>
             </div>
           </div>
 
@@ -1762,6 +1761,58 @@
     </div>
 
     <script>
+      // ---------- FUNCTION TO CREATE REALISTIC BAR GRAPHS ----------
+      function createBarGraph(containerId, basePattern) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        // Clear existing bars
+        container.innerHTML = "";
+
+        // Define colors for each card type
+        const colors = {
+          "members-bars": "#6366f1",
+          "active-bars": "#06b6d4",
+          "points-bars": "#10b981",
+          "channels-bars": "#8b5cf6",
+          "revenue-bars": "#f59e0b",
+        };
+
+        // Create 10 bars with different heights to simulate real data
+        for (let i = 0; i < 10; i++) {
+          const bar = document.createElement("div");
+          bar.className = "bar-graph-item";
+
+          // Use the base pattern to create realistic up-and-down variations
+          let height;
+          if (basePattern === "members") {
+            // Members: Gradual growth with some fluctuations
+            const patterns = [0.4, 0.6, 0.5, 0.7, 0.9, 0.8, 1.0, 0.9, 1.0, 0.8];
+            height = patterns[i];
+          } else if (basePattern === "active") {
+            // Active: Steady with occasional dips
+            const patterns = [0.7, 0.8, 0.6, 0.9, 0.8, 1.0, 0.7, 0.9, 0.8, 0.6];
+            height = patterns[i];
+          } else if (basePattern === "points") {
+            // Points: Increasing trend
+            const patterns = [0.3, 0.5, 0.4, 0.6, 0.8, 0.7, 0.9, 1.0, 0.9, 0.7];
+            height = patterns[i];
+          } else if (basePattern === "channels") {
+            // Channels: More varied, like channel performance
+            const patterns = [0.9, 0.5, 0.8, 0.4, 0.7, 0.3, 0.6, 0.8, 0.5, 0.9];
+            height = patterns[i];
+          } else {
+            // Revenue: Peaks and valleys like sales data
+            const patterns = [0.5, 0.7, 0.9, 0.6, 0.8, 1.0, 0.7, 0.5, 0.8, 0.6];
+            height = patterns[i];
+          }
+
+          bar.style.setProperty("--bar-height", height);
+          bar.style.backgroundColor = colors[containerId];
+          container.appendChild(bar);
+        }
+      }
+
       // ---------- ORIGINAL JAVASCRIPT – UPDATED WITH ACTIVE MEMBERS ----------
       const defaultConfig = {
         company_name: "goFides",
@@ -1773,6 +1824,7 @@
         secondary_action_color: "#10b981",
       };
       let config = { ...defaultConfig };
+
       function toggleSubmenu(id) {
         const submenu = document.getElementById(id);
         const chevronId = id.replace("-submenu", "-chevron");
@@ -1786,6 +1838,7 @@
           }
         }
       }
+
       const timeToggle = document.getElementById("time-toggle");
       if (timeToggle) {
         timeToggle.addEventListener("click", (e) => {
@@ -1798,6 +1851,7 @@
           }
         });
       }
+
       function updateDataForPeriod(period) {
         const data = {
           daily: {
@@ -1839,41 +1893,7 @@
           }
         }
       }
-      function generateSparklines() {
-        const sparklineData = {
-          "sparkline-members": [
-            65, 72, 68, 80, 75, 85, 78, 90, 88, 95, 92, 100,
-          ],
-          "sparkline-points": [50, 55, 60, 58, 70, 65, 75, 80, 78, 85, 88, 92],
-          "sparkline-channels": [
-            60, 60, 65, 65, 70, 70, 75, 80, 85, 85, 90, 100,
-          ],
-          "sparkline-revenue": [40, 48, 55, 52, 65, 70, 68, 78, 85, 82, 90, 95],
-          "sparkline-active-members": [
-            65, 68, 72, 75, 78, 80, 82, 85, 83, 86, 88, 90,
-          ],
-        };
-        const colors = {
-          "sparkline-members": "#6366f1",
-          "sparkline-points": "#10b981",
-          "sparkline-channels": "#8b5cf6",
-          "sparkline-revenue": "#f59e0b",
-          "sparkline-active-members": "#06b6d4",
-        };
-        Object.keys(sparklineData).forEach((id) => {
-          const container = document.getElementById(id);
-          if (container) {
-            container.innerHTML = "";
-            sparklineData[id].forEach((value) => {
-              const bar = document.createElement("div");
-              bar.className = "sparkline-bar";
-              bar.style.height = `${value}%`;
-              bar.style.backgroundColor = colors[id];
-              container.appendChild(bar);
-            });
-          }
-        });
-      }
+
       async function onConfigChange(newConfig) {
         const companyName = document.getElementById("company-name");
         const dashboardTitle = document.getElementById("dashboard-title");
@@ -1894,6 +1914,7 @@
               newConfig.surface_color || defaultConfig.surface_color;
           });
       }
+
       function mapToCapabilities(config) {
         return {
           recolorables: [
@@ -1943,6 +1964,7 @@
           fontSizeable: undefined,
         };
       }
+
       function mapToEditPanelValues(config) {
         return new Map([
           ["company_name", config.company_name || defaultConfig.company_name],
@@ -1994,9 +2016,15 @@
           overlay.classList.remove("active");
           document.body.style.overflow = "";
         }
+
+        // Initialize all bar graphs
+        createBarGraph("members-bars", "members");
+        createBarGraph("active-bars", "active");
+        createBarGraph("points-bars", "points");
+        createBarGraph("channels-bars", "channels");
+        createBarGraph("revenue-bars", "revenue");
       });
 
-      generateSparklines();
       if (window.elementSdk) {
         window.elementSdk.init({
           defaultConfig,
