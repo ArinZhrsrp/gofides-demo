@@ -37,6 +37,7 @@
         --accent-emerald: #10b981;
         --accent-amber: #f59e0b;
         --accent-rose: #f43f5e;
+        --accent-cyan: #22d3ee;
         --border-color: #334155;
         --sidebar-gradient: linear-gradient(180deg, #0b1020 0%, #020617 100%);
       }
@@ -406,6 +407,14 @@
           var(--accent-rose),
           #fb7185,
           rgba(244, 63, 94, 0.15)
+        );
+      }
+      .kpi-card.cyan::before {
+        background: linear-gradient(
+          90deg,
+          var(--accent-cyan),
+          #67e8f9,
+          rgba(34, 211, 238, 0.15)
         );
       }
 
@@ -1012,11 +1021,11 @@
           </div>
         </div>
 
-        <!-- DASHBOARD CONTENT – FULLY PRESERVED (exactly as original) -->
+        <!-- DASHBOARD CONTENT – WITH ACTIVE MEMBERS ADDED -->
         <div class="flex-1 overflow-y-auto p-6 space-y-6">
-          <!-- KPI ROW (unchanged) -->
-          <div class="grid grid-cols-4 gap-4">
-            <!-- TOTAL MEMBERS -->
+          <!-- KPI ROW - UPDATED WITH 5 CARDS (4 original + 1 Active Members) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+            <!-- TOTAL MEMBERS (unchanged) -->
             <div class="kpi-card" style="border-radius: 18px">
               <div class="flex items-start justify-between">
                 <div>
@@ -1042,7 +1051,90 @@
                 <div class="stat-bar"></div>
               </div>
             </div>
-            <!-- Total Points Issued -->
+
+            <!-- ACTIVE MEMBERS (NEW) -->
+            <div class="kpi-card cyan">
+              <div class="flex items-start justify-between">
+                <div>
+                  <p
+                    class="text-xs font-medium text-slate-400 uppercase tracking-wide"
+                  >
+                    Active Members
+                  </p>
+                  <p
+                    class="text-2xl font-bold text-white mt-1"
+                    id="kpi-active-members"
+                  >
+                    16,912
+                  </p>
+                  <div class="flex items-center gap-2 mt-1">
+                    <span class="metric-badge up"
+                      ><svg
+                        class="w-3 h-3"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M5 10l7-7m0 0l7 7m-7-7v18"
+                        /></svg
+                      >68%</span
+                    >
+                    <span class="text-xs text-slate-500">active rate</span>
+                  </div>
+                </div>
+                <div class="p-2 rounded-lg bg-cyan-500/20">
+                  <svg
+                    class="w-5 h-5 text-cyan-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="1.5"
+                      d="M9 12l2 2 4-5m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+              </div>
+              <div class="sparkline">
+                <div
+                  class="sparkline-bar"
+                  style="height: 65%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 70%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 75%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 80%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 78%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 82%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+                <div
+                  class="sparkline-bar"
+                  style="height: 85%; background: rgba(34, 211, 238, 0.3)"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Total Points Issued (unchanged) -->
             <div class="kpi-card emerald">
               <div class="flex items-start justify-between">
                 <div>
@@ -1120,7 +1212,8 @@
                 ></div>
               </div>
             </div>
-            <!-- Total Channels -->
+
+            <!-- Total Channels (unchanged) -->
             <div class="kpi-card amber">
               <div class="flex items-start justify-between">
                 <div>
@@ -1201,7 +1294,8 @@
                 ></div>
               </div>
             </div>
-            <!-- Total Revenue -->
+
+            <!-- Total Revenue (unchanged) -->
             <div class="kpi-card rose">
               <div class="flex items-start justify-between">
                 <div>
@@ -1945,7 +2039,7 @@
         }
       };
 
-      // ---------- TIME TOGGLE ----------
+      // ---------- TIME TOGGLE (UPDATED WITH ACTIVE MEMBERS) ----------
       const timeToggle = document.getElementById("time-toggle");
       const timeButtons = timeToggle
         ? timeToggle.querySelectorAll("button")
@@ -1956,18 +2050,21 @@
           points: "52.4K",
           channels: "12",
           revenue: "$24.8K",
+          activeMembers: "612",
         },
         monthly: {
           members: "24,847",
           points: "1.24M",
           channels: "12",
           revenue: "$892K",
+          activeMembers: "16,912",
         },
         ytd: {
           members: "89,421",
           points: "12.4M",
           channels: "12",
           revenue: "$4.2M",
+          activeMembers: "62,847",
         },
       };
       timeButtons.forEach((button) => {
@@ -1981,6 +2078,12 @@
             document.getElementById("kpi-points").textContent = data.points;
             document.getElementById("kpi-channels").textContent = data.channels;
             document.getElementById("kpi-revenue").textContent = data.revenue;
+            // Add Active Members update
+            const activeMembersElement =
+              document.getElementById("kpi-active-members");
+            if (activeMembersElement) {
+              activeMembersElement.textContent = data.activeMembers;
+            }
           }
         });
       });

@@ -729,8 +729,10 @@
             </div>
           </div>
 
-          <!-- KPI CARDS · grid-cols-4 -> mobile 1fr (via media) -->
-          <div class="grid grid-cols-4 gap-4 mb-6">
+          <!-- KPI CARDS - UPDATED WITH 5 CARDS (4 original + Active Members) -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"
+          >
             <!-- Total Members -->
             <div class="kpi-card">
               <div class="flex items-start justify-between">
@@ -780,6 +782,55 @@
               </div>
               <div class="sparkline mt-4" id="sparkline-members"></div>
             </div>
+
+            <!-- ACTIVE MEMBERS (NEW) -->
+            <div class="kpi-card">
+              <div class="flex items-start justify-between">
+                <div>
+                  <p
+                    class="text-xs font-medium text-slate-500 uppercase tracking-wide"
+                  >
+                    Active Members
+                  </p>
+                  <p
+                    class="text-2xl font-bold text-slate-800 mt-1"
+                    id="kpi-active-members"
+                  >
+                    16,912
+                  </p>
+                  <div class="flex items-center gap-1 mt-2">
+                    <svg
+                      class="w-4 h-4 text-emerald-500"
+                      viewbox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                      <polyline points="17 6 23 6 23 12" /></svg
+                    ><span class="text-sm font-medium text-emerald-600"
+                      >68%</span
+                    ><span class="text-xs text-slate-500">active rate</span>
+                  </div>
+                </div>
+                <div
+                  class="w-10 h-10 rounded-lg bg-cyan-50 flex items-center justify-center"
+                >
+                  <svg
+                    class="w-5 h-5 text-cyan-600"
+                    viewbox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                </div>
+              </div>
+              <div class="sparkline mt-4" id="sparkline-active-members"></div>
+            </div>
+
             <!-- Points Issued -->
             <div class="kpi-card">
               <div class="flex items-start justify-between">
@@ -828,6 +879,7 @@
               </div>
               <div class="sparkline mt-4" id="sparkline-points"></div>
             </div>
+
             <!-- Total Channels -->
             <div class="kpi-card">
               <div class="flex items-start justify-between">
@@ -875,6 +927,7 @@
               </div>
               <div class="sparkline mt-4" id="sparkline-channels"></div>
             </div>
+
             <!-- Total Revenue -->
             <div class="kpi-card">
               <div class="flex items-start justify-between">
@@ -1709,7 +1762,7 @@
     </div>
 
     <script>
-      // ---------- ORIGINAL JAVASCRIPT – 100% UNCHANGED ----------
+      // ---------- ORIGINAL JAVASCRIPT – UPDATED WITH ACTIVE MEMBERS ----------
       const defaultConfig = {
         company_name: "goFides",
         dashboard_title: "Executive Dashboard",
@@ -1752,18 +1805,21 @@
             points: "125K",
             channels: "12",
             revenue: "$28K",
+            activeMembers: "612",
           },
           monthly: {
             members: "24,847",
             points: "3.2M",
             channels: "12",
             revenue: "$847K",
+            activeMembers: "16,912",
           },
           ytd: {
             members: "24,847",
             points: "38.5M",
             channels: "12",
             revenue: "$10.2M",
+            activeMembers: "62,847",
           },
         };
         const periodData = data[period];
@@ -1775,6 +1831,12 @@
             periodData.channels;
           document.getElementById("kpi-revenue").textContent =
             periodData.revenue;
+          // Update Active Members
+          const activeMembersElement =
+            document.getElementById("kpi-active-members");
+          if (activeMembersElement) {
+            activeMembersElement.textContent = periodData.activeMembers;
+          }
         }
       }
       function generateSparklines() {
@@ -1787,12 +1849,16 @@
             60, 60, 65, 65, 70, 70, 75, 80, 85, 85, 90, 100,
           ],
           "sparkline-revenue": [40, 48, 55, 52, 65, 70, 68, 78, 85, 82, 90, 95],
+          "sparkline-active-members": [
+            65, 68, 72, 75, 78, 80, 82, 85, 83, 86, 88, 90,
+          ],
         };
         const colors = {
           "sparkline-members": "#6366f1",
           "sparkline-points": "#10b981",
           "sparkline-channels": "#8b5cf6",
           "sparkline-revenue": "#f59e0b",
+          "sparkline-active-members": "#06b6d4",
         };
         Object.keys(sparklineData).forEach((id) => {
           const container = document.getElementById(id);
