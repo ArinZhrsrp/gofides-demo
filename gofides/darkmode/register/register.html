@@ -407,14 +407,18 @@
     <div class="depth-grid"></div>
 
     <!-- Floating Overlay SVG -->
-    <img src="image5a.svg" alt="Floating Overlay" class="floating-overlay" />
+    <img
+      src="/gofides/darkmode/register/image5a.svg"
+      alt="Floating Overlay"
+      class="floating-overlay"
+    />
 
     <!-- Desktop Left Side - Fixed position only on desktop -->
     <div class="hidden lg:block fixed top-0 left-0 w-1/2 h-screen">
       <div class="relative h-full flex flex-col">
         <div class="absolute top-12 left-20">
           <img
-            src="bayo-logo.svg"
+            src="/gofides/darkmode/register/bayo-logo.svg"
             alt="Bayo"
             class="h-10 w-auto original-logo"
           />
@@ -431,7 +435,7 @@
             </h1>
           </div>
           <img
-            src="imageregister.svg"
+            src="/gofides/darkmode/register/imageregister.svg"
             alt="Registration Visual"
             class="hero-image"
           />
@@ -478,7 +482,7 @@
             class="absolute top-6 right-0 sm:top-8 sm:right-0 md:top-8 md:right-0"
           >
             <a
-              href="login.html"
+              href="/gofides/darkmode/register/login.html"
               class="register-cta btn-asymmetric bg-white text-[#1e0a4d] px-6 md:px-8 py-2.5 font-bold text-xs shadow-xl hover:pr-10 block"
             >
               <span>Log In Here</span>
@@ -487,7 +491,7 @@
 
           <div class="mb-8 text-left mt-4 md:mt-0">
             <img
-              src="gofides-logo 1.svg"
+              src="/gofides/darkmode/register/gofides-logo-1.svg"
               alt="Gofidés"
               class="h-12 w-auto mb-6 original-logo"
             />
@@ -563,7 +567,7 @@
                     >
                       <img
                         id="passwordIcon"
-                        src="open-eye.svg"
+                        src="/gofides/darkmode/register/open-eye.svg"
                         class="w-4 h-4"
                       />
                     </button>
@@ -593,7 +597,7 @@
                     >
                       <img
                         id="confirmIcon"
-                        src="open-eye.svg"
+                        src="/gofides/darkmode/register/open-eye.svg"
                         class="w-4 h-4"
                       />
                     </button>
@@ -666,7 +670,9 @@
         const isHidden = passwordInput.type === "password";
 
         passwordInput.type = isHidden ? "text" : "password";
-        icon.src = isHidden ? "eye-close.svg" : "open-eye.svg";
+        icon.src = isHidden
+          ? "/gofides/darkmode/register/eye-close.svg"
+          : "/gofides/darkmode/register/open-eye.svg";
       }
     </script>
   </body>
