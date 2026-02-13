@@ -110,6 +110,7 @@
 
       .section {
         margin-top: 18px;
+        margin-bottom: 6px;
         font-size: 11px;
         color: #64748b;
         letter-spacing: 1px;
@@ -142,13 +143,37 @@
         color: #fff;
       }
 
+      .item.active svg {
+        stroke: white;
+      }
+
       .item:hover {
         background: rgba(139, 92, 246, 0.15);
         color: white;
       }
 
+      .item-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .item-icon svg {
+        width: 18px;
+        height: 18px;
+        stroke: #cbd5f5;
+        stroke-width: 1.5;
+        fill: none;
+      }
+
+      .item:hover .item-icon svg {
+        stroke: white;
+      }
+
       .sub {
-        margin-left: 36px;
+        margin-left: 42px;
         font-size: 13px;
         color: #94a3b8;
         margin-top: 4px;
@@ -156,12 +181,36 @@
         border-radius: 10px;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
       }
 
       .sub:hover {
         background: rgba(139, 92, 246, 0.1);
         color: #e2e8f0;
+      }
+
+      .sub:hover .sub-icon svg {
+        stroke: #e2e8f0;
+      }
+
+      .sub-icon {
+        width: 16px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sub-icon svg {
+        width: 14px;
+        height: 14px;
+        stroke: #94a3b8;
+        stroke-width: 1.5;
+        fill: none;
+      }
+
+      .sub:hover .sub-icon svg {
+        stroke: #e2e8f0;
       }
 
       .footer {
@@ -189,6 +238,7 @@
       .chevron {
         margin-left: auto;
         transition: transform 0.2s;
+        font-size: 14px;
       }
 
       /* logout button style */
@@ -523,7 +573,7 @@
     ></div>
 
     <div class="flex h-full w-full">
-      <!-- =============== PREMIUM SIDEBAR – LOGOUT REDIRECT UPDATED ============= -->
+      <!-- =============== PREMIUM SIDEBAR – WITH WHITE SVG ICONS ============= -->
       <aside id="mainSidebar" class="premium-sidebar">
         <!-- Brand / Logo -->
         <div class="brand">
@@ -534,29 +584,106 @@
           </div>
         </div>
 
-        <!-- Navigation Menu – Referrals removed, all other updates applied -->
+        <!-- Navigation Menu – All items now have white SVG icons -->
         <div class="menu">
           <!-- Dashboard -->
           <a class="item active" href="#dashboard">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="3" y="3" width="7" height="7" rx="1" />
+                <rect x="14" y="3" width="7" height="7" rx="1" />
+                <rect x="3" y="14" width="7" height="7" rx="1" />
+                <rect x="14" y="14" width="7" height="7" rx="1" />
+              </svg>
+            </span>
             <span>Dashboard</span>
           </a>
 
           <!-- CUSTOMERS section -->
           <div class="section">CUSTOMERS</div>
-          <!-- Member Directory → Customer List and Referrals (relabeled) -->
-          <a class="item" href="#members">Customer List and Referrals</a>
-          <a class="item" href="#customer-group">Customer Group</a>
+          <!-- Customer List and Referrals -->
+          <a class="item" href="#members">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            <span>Customer List and Referrals</span>
+          </a>
+          <!-- Customer Group -->
+          <a class="item" href="#customer-group">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M22 12h-4l-3 9-4-18-3 9H2" />
+              </svg>
+            </span>
+            <span>Customer Group</span>
+          </a>
 
           <!-- OPERATIONS section -->
           <div class="section">OPERATIONS</div>
-          <a class="item" href="#redemptions">Redemptions</a>
-          <a class="item" href="#transactions">Transactions</a>
+          <!-- Redemptions -->
+          <a class="item" href="#redemptions">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            </span>
+            <span>Redemptions</span>
+          </a>
+          <!-- Transactions -->
+          <a class="item" href="#transactions">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <line x1="2" y1="10" x2="22" y2="10" />
+              </svg>
+            </span>
+            <span>Transactions</span>
+          </a>
 
-          <!-- ENGAGEMENT section – Referrals removed -->
+          <!-- ENGAGEMENT section -->
           <div class="section">ENGAGEMENT</div>
-          <a class="item" href="#campaigns">Campaigns</a>
-          <a class="item" href="#rewards">Rewards Catalog</a>
-          <a class="item" href="#ledgers">Point Ledgers</a>
+          <!-- Campaigns -->
+          <a class="item" href="#campaigns">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path
+                  d="M12 2a10 10 0 0 1 10 10 10 10 0 0 1-10 10 10 10 0 0 1-10-10 10 10 0 0 1 10-10z"
+                />
+                <path d="M12 6v6l4 2" />
+              </svg>
+            </span>
+            <span>Campaigns</span>
+          </a>
+          <!-- Rewards Catalog -->
+          <a class="item" href="#rewards">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path
+                  d="M12 15v2m-6-2H3v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-4h-3M7 9l5 3 5-3"
+                />
+                <path d="M12 4v7" />
+                <rect x="3" y="6" width="18" height="3" rx="1" />
+              </svg>
+            </span>
+            <span>Rewards Catalog</span>
+          </a>
+          <!-- Point Ledgers -->
+          <a class="item" href="#ledgers">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <line x1="8" y1="10" x2="16" y2="10" />
+                <line x1="8" y1="14" x2="12" y2="14" />
+              </svg>
+            </span>
+            <span>Point Ledgers</span>
+          </a>
 
           <!-- Campaign Mechanics with toggle -->
           <a
@@ -564,19 +691,76 @@
             id="cm-toggle"
             onclick="toggleSubmenu('cm-sub', 'cm-chevron')"
           >
-            Campaign Mechanics
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path
+                  d="M12 6V4m0 2a2 2 0 1 0 0 4m0-4a2 2 0 1 1 0 4m-6 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0v4m12-4a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0v4"
+                />
+                <line x1="8" y1="12" x2="16" y2="12" />
+              </svg>
+            </span>
+            <span>Campaign Mechanics</span>
             <span class="chevron" id="cm-chevron">▾</span>
           </a>
           <div id="cm-sub" class="hidden">
-            <div class="sub">• Preset List</div>
-            <div class="sub">• Custom Integration List</div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </span>
+              <span>Preset List</span>
+            </div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="9" x2="16" y2="9" />
+                  <line x1="8" y1="13" x2="12" y2="13" />
+                  <line x1="2" y1="17" x2="22" y2="17" />
+                </svg>
+              </span>
+              <span>Custom Integration List</span>
+            </div>
           </div>
 
           <!-- STRATEGY section -->
           <div class="section">STRATEGY</div>
-          <a class="item" href="#tiers">Program Tiers</a>
-          <a class="item" href="#audiences">Audiences</a>
-          <a class="item" href="#touchpoints">Touchpoints</a>
+          <!-- Program Tiers -->
+          <a class="item" href="#tiers">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <polyline
+                  points="12 2 16 8 22 9 18 14 19 20 12 17 5 20 6 14 2 9 8 8 12 2"
+                />
+              </svg>
+            </span>
+            <span>Program Tiers</span>
+          </a>
+          <!-- Audiences -->
+          <a class="item" href="#audiences">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="8" r="4" />
+                <path d="M5.5 13.5A8 8 0 0 1 12 11a8 8 0 0 1 6.5 2.5" />
+                <path d="M5.5 20.5A8 8 0 0 1 12 18a8 8 0 0 1 6.5 2.5" />
+              </svg>
+            </span>
+            <span>Audiences</span>
+          </a>
+          <!-- Touchpoints -->
+          <a class="item" href="#touchpoints">
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="12 6 12 12 16 14" />
+              </svg>
+            </span>
+            <span>Touchpoints</span>
+          </a>
 
           <!-- ADMINISTRATION section -->
           <div class="section">ADMINISTRATION</div>
@@ -587,27 +771,91 @@
             id="settings-toggle"
             onclick="toggleSubmenu('settings-sub', 'settings-chevron')"
           >
-            System Settings
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                  d="M19.4 15a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H5.78a1.65 1.65 0 0 0-1.51 1 1.65 1.65 0 0 0 .33 1.82l.05.05A10 10 0 0 0 12 17.66a10 10 0 0 0 6.26-2.26l.05-.05z"
+                />
+                <path
+                  d="M19.4 9a1.65 1.65 0 0 1 .33 1.82 1.65 1.65 0 0 1-1.51 1H5.78a1.65 1.65 0 0 1-1.51-1 1.65 1.65 0 0 1 .33-1.82l.05-.05A10 10 0 0 1 12 6.34a10 10 0 0 1 6.26 2.26l.05.05z"
+                />
+              </svg>
+            </span>
+            <span>System Settings</span>
             <span class="chevron" id="settings-chevron">▾</span>
           </a>
           <div id="settings-sub" class="hidden">
-            <div class="sub">• Account Rules</div>
-            <div class="sub">• Referral Logic</div>
-            <div class="sub">• Points Policy</div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                  <line x1="16" y1="2" x2="16" y2="6" />
+                  <line x1="8" y1="2" x2="8" y2="6" />
+                  <line x1="3" y1="10" x2="21" y2="10" />
+                </svg>
+              </span>
+              <span>Account Rules</span>
+            </div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M17 2l4 4-4 4" />
+                  <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                  <path d="M7 22l-4-4 4-4" />
+                  <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+                </svg>
+              </span>
+              <span>Referral Logic</span>
+            </div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                  <polyline points="2 17 12 22 22 17" />
+                  <polyline points="2 12 12 17 22 12" />
+                </svg>
+              </span>
+              <span>Points Policy</span>
+            </div>
           </div>
 
-          <!-- Team Access with submenu (Staff List → Member List) -->
+          <!-- Team Access with submenu -->
           <a
             class="item"
             id="team-toggle"
             onclick="toggleSubmenu('team-sub', 'team-chevron')"
           >
-            Team Access
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </span>
+            <span>Team Access</span>
             <span class="chevron" id="team-chevron">▾</span>
           </a>
           <div id="team-sub" class="hidden">
-            <div class="sub">• Member List</div>
-            <div class="sub">• Permissions</div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+              </span>
+              <span>Member List</span>
+            </div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                </svg>
+              </span>
+              <span>Permissions</span>
+            </div>
           </div>
 
           <!-- Developer Only with submenu -->
@@ -616,15 +864,33 @@
             id="developer-toggle"
             onclick="toggleSubmenu('developer-sub', 'developer-chevron')"
           >
-            Developer Only
+            <span class="item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                <line x1="8" y1="9" x2="16" y2="9" />
+                <line x1="8" y1="13" x2="12" y2="13" />
+                <line x1="2" y1="17" x2="22" y2="17" />
+              </svg>
+            </span>
+            <span>Developer Only</span>
             <span class="chevron" id="developer-chevron">▾</span>
           </a>
           <div id="developer-sub" class="hidden">
-            <div class="sub">• Custom Integration</div>
+            <div class="sub">
+              <span class="sub-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                  <line x1="8" y1="9" x2="16" y2="9" />
+                  <line x1="8" y1="13" x2="12" y2="13" />
+                  <line x1="2" y1="17" x2="22" y2="17" />
+                </svg>
+              </span>
+              <span>Custom Integration</span>
+            </div>
           </div>
         </div>
 
-        <!-- Footer / User Profile – LOGOUT BUTTON now redirects to Register/login.html -->
+        <!-- Footer / User Profile -->
         <div class="footer">
           <div class="avatar">JD</div>
           <div style="flex: 1; min-width: 0">
@@ -651,7 +917,7 @@
               >Administrator</small
             >
           </div>
-          <!-- ✅ REDIRECT UPDATED: now points to Register/login.html -->
+          <!-- Logout button -->
           <button
             class="logout-btn"
             onclick="
@@ -670,7 +936,7 @@
 
       <!-- =============== MAIN CONTENT – DARK DASHBOARD (fully preserved) ============= -->
       <main class="flex-1 flex flex-col h-full overflow-hidden bg-slate-900">
-        <!-- Header -->
+        <!-- Header (unchanged) -->
         <div
           class="flex-shrink-0 border-b border-slate-700 bg-slate-800/50 backdrop-blur-sm px-4 md:px-6 py-4"
         >
@@ -704,7 +970,7 @@
                 </p>
               </div>
             </div>
-            <!-- Right side: time toggle + buttons -->
+            <!-- Right side: time toggle + buttons (unchanged) -->
             <div class="flex items-center flex-wrap gap-3">
               <div class="time-toggle" id="time-toggle">
                 <button class="active" data-period="daily">Daily</button>
@@ -748,7 +1014,7 @@
 
         <!-- DASHBOARD CONTENT – FULLY PRESERVED (exactly as original) -->
         <div class="flex-1 overflow-y-auto p-6 space-y-6">
-          <!-- KPI ROW -->
+          <!-- KPI ROW (unchanged) -->
           <div class="grid grid-cols-4 gap-4">
             <!-- TOTAL MEMBERS -->
             <div class="kpi-card" style="border-radius: 18px">
@@ -1018,7 +1284,7 @@
             </div>
           </div>
 
-          <!-- Performance Comparison Row -->
+          <!-- Performance Comparison Row (unchanged) -->
           <div class="grid grid-cols-2 gap-4">
             <!-- Top 10 High-Point Earners -->
             <div class="chart-card">
@@ -1237,7 +1503,7 @@
             </div>
           </div>
 
-          <!-- Distribution Hub & Metrics Row -->
+          <!-- Distribution Hub & Metrics Row (unchanged) -->
           <div class="grid grid-cols-4 gap-4">
             <!-- Members by Tiers Donut -->
             <div class="chart-card">
